@@ -3,17 +3,17 @@ package handler
 import (
 	"context"
 	"net/http"
-	"ssn-backend/utils/app_context"
+	"ssnbackend/utils/appcontext"
 )
 
 const userContextKey = "userContext"
 
-func SetUserInContext(r *http.Request, userContext app_context.UserContext) context.Context {
+func SetUserInContext(r *http.Request, userContext appcontext.UserContext) context.Context {
 	ctx := context.WithValue(r.Context(), userContextKey, userContext)
 	return ctx
 }
 
-func GetUserFromContext(r *http.Request) app_context.UserContext {
-	value, _ := r.Context().Value(userContextKey).(app_context.UserContext)
+func GetUserFromContext(r *http.Request) appcontext.UserContext {
+	value, _ := r.Context().Value(userContextKey).(appcontext.UserContext)
 	return value
 }

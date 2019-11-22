@@ -2,8 +2,8 @@ package middlewares
 
 import (
 	"net/http"
-	"ssn-backend/utils/handler"
-	"ssn-backend/utils/token"
+	"ssnbackend/utils/handler"
+	"ssnbackend/utils/token"
 	"strings"
 )
 

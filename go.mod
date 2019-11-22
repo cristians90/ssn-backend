@@ -1,4 +1,4 @@
-module ssn-backend
+module ssnbackend
 
 go 1.13
 

@@ -5,9 +5,9 @@ import (
 	"fmt"
 	"net/http"
 	"regexp"
-	"ssn-backend/repository/models"
-	"ssn-backend/repository/post"
-	"ssn-backend/utils/handler"
+	"ssnbackend/repository/models"
+	"ssnbackend/repository/post"
+	"ssnbackend/utils/handler"
 	"strconv"
 	"time"
 )

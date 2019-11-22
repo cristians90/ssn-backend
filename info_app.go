@@ -1,4 +1,4 @@
-package ssn_backend
+package main
 
 func printAppInfo() {
 	asciiArt := `

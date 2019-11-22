@@ -2,11 +2,11 @@ package handlers
 
 import (
 	"net/http"
-	"ssn-backend/repository/models"
-	"ssn-backend/repository/user"
-	"ssn-backend/utils/app_context"
-	"ssn-backend/utils/handler"
-	"ssn-backend/utils/token"
+	"ssnbackend/repository/models"
+	"ssnbackend/repository/user"
+	"ssnbackend/utils/appcontext"
+	"ssnbackend/utils/handler"
+	"ssnbackend/utils/token"
 )
 
 func PostSignInHandler(w http.ResponseWriter, r *http.Request) {
@@ -64,7 +64,7 @@ func PostLogInHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tokenPayload := app_context.UserContext{IDUser: userInDb.ID, UserName: userInDb.Username}
+	tokenPayload := appcontext.UserContext{IDUser: userInDb.ID, UserName: userInDb.Username}
 
 	stringToken, _ := token.GenerateToken(tokenPayload)
 	stringRefreshToken, _ := token.GenerateRefreshToken(tokenPayload)
@@ -101,7 +101,7 @@ func PostRefreshTokenHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	tokenPayload := app_context.UserContext{IDUser: userInDb.ID, UserName: userInDb.Username}
+	tokenPayload := appcontext.UserContext{IDUser: userInDb.ID, UserName: userInDb.Username}
 
 	stringToken, _ := token.GenerateToken(tokenPayload)
 	stringRefreshToken, _ := token.GenerateRefreshToken(tokenPayload)

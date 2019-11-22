@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"github.com/go-chi/chi"
 	"net/http"
-	"ssn-backend/repository/user"
-	"ssn-backend/utils/handler"
+	"ssnbackend/repository/user"
+	"ssnbackend/utils/handler"
 	"strconv"
 )
 

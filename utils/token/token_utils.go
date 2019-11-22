@@ -4,10 +4,10 @@ import (
 	"encoding/base64"
 	"encoding/json"
 	"github.com/hako/branca"
-	"ssn-backend/utils/app_context"
+	"ssnbackend/utils/appcontext"
 )
 
-func GenerateToken(payload app_context.UserContext) (string, error) {
+func GenerateToken(payload appcontext.UserContext) (string, error) {
 	b := generateBranca(120)
 
 	bytes, err := json.Marshal(payload)
@@ -17,7 +17,7 @@ func GenerateToken(payload app_context.UserContext) (string, error) {
 	return token, err
 }
 
-func GenerateRefreshToken(userContext app_context.UserContext) (string, error) {
+func GenerateRefreshToken(userContext appcontext.UserContext) (string, error) {
 	b := generateBranca(604800)
 
 	payload := refreshToken{IDUser: userContext.IDUser}
@@ -29,8 +29,8 @@ func GenerateRefreshToken(userContext app_context.UserContext) (string, error) {
 	return refreshToken, err
 }
 
-func ValidateToken(token string) (app_context.UserContext, error) {
-	context := app_context.UserContext{}
+func ValidateToken(token string) (appcontext.UserContext, error) {
+	context := appcontext.UserContext{}
 	b := generateBranca(120)
 
 	payload, err := b.DecodeToString(token)

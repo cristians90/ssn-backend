@@ -1,8 +1,8 @@
-package ssn_backend
+package main
 
 import (
 	"net/http"
-	"ssn-backend/routes"
+	"ssnbackend/routes"
 )
 
 func main() {

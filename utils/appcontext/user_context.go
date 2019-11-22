@@ -1,4 +1,4 @@
-package app_context
+package appcontext
 
 type UserContext struct {
 	IDUser   uint64

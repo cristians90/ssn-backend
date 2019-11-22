@@ -4,8 +4,8 @@ import (
 	"github.com/asdine/storm"
 	"github.com/asdine/storm/q"
 	"log"
-	"ssn-backend/repository/config"
-	"ssn-backend/repository/models"
+	"ssnbackend/repository/config"
+	"ssnbackend/repository/models"
 	"time"
 )
 

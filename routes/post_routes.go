@@ -3,7 +3,7 @@ package routes
 import (
 	"github.com/go-chi/chi"
 	"net/http"
-	"ssn-backend/handlers"
+	"ssnbackend/handlers"
 )
 
 func GetPostRoutes() http.Handler {
