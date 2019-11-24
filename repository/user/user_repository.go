@@ -17,7 +17,7 @@ func InsertUser(user models.UserModel) error {
 	}
 
 	user.Enabled = true
-	user.CreatedAt = time.Now()
+	user.CreatedAt = time.Now().UTC()
 	user.ModifiedAt = time.Time{}
 	user.DisabledAt = time.Time{}
 
@@ -28,6 +28,58 @@ func InsertUser(user models.UserModel) error {
 	}
 
 	return nil
+}
+
+func SetAvatar(binaryImage []byte, contentType string, userID uint64) error {
+	db, err := storm.Open(config.DatabaseFile)
+	defer db.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	avatar := models.UserAvatarModel{}
+
+	err = db.Select(q.Eq("UserID", userID)).First(&avatar)
+
+	if err == nil {
+		avatar.BinaryImage = binaryImage
+		avatar.BinaryContentType = contentType
+		avatar.ModifiedAt = time.Now().UTC()
+		err = db.Update(&avatar)
+	} else {
+		avatar.BinaryImage = binaryImage
+		avatar.BinaryContentType = contentType
+		avatar.UserID = userID
+		avatar.Enabled = true
+		avatar.CreatedAt = time.Now().UTC()
+		avatar.ModifiedAt = time.Time{}
+		avatar.DisabledAt = time.Time{}
+		err = db.Save(&avatar)
+	}
+
+	if err != nil {
+		return err
+	}
+
+	return nil
+}
+
+func GetAvatar(userID uint64) (models.UserAvatarModel, error) {
+	db, err := storm.Open(config.DatabaseFile)
+	defer db.Close()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	var avatar models.UserAvatarModel
+
+	err = db.Select(q.Eq("UserID", userID)).First(&avatar)
+
+	if err != nil {
+		return models.UserAvatarModel{}, err
+	}
+
+	return avatar, nil
 }
 
 func GetUserByUsername(username string) (models.UserModel, error) {
@@ -76,8 +128,6 @@ func UpdateUser(user models.UserModel) error {
 	var userInDb models.UserModel
 
 	err = db.Select(q.Eq("ID", user.ID), q.Eq("Enabled", true)).First(&userInDb)
-
-	//err = db.One("ID", user.ID, &userInDb)
 
 	user.Enabled = true
 	user.ModifiedAt = time.Now()

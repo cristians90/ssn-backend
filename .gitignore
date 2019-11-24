@@ -16,3 +16,6 @@ SSN_DATA.db
 
 # Program Binary
 ssnbackend
+
+# Folders
+.vscode

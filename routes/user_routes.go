@@ -11,6 +11,8 @@ func GetUserRoutes() http.Handler {
 
 	r.Get("/{userID}", handlers.GetUserHandler)
 	r.Put("/", handlers.PutUserHandler)
+	r.Post("/avatar", handlers.PostAvatarHandler)
+	r.Get("/{userID}/avatar", handlers.GetAvatarHandler)
 
 	return r
 }
